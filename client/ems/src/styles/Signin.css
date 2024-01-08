@@ -1,0 +1,21 @@
+.signin-wrapper {
+background: linear-gradient(to right, rgb(15, 12, 41), rgb(48, 43, 99), rgb(36, 36, 62));
+height: 772px;
+position: fixed;
+width: 100%;
+}
+
+.signin-container {
+    background-color: #ccc;
+    width: 40%;
+    margin: auto;
+    margin-top: 150px;
+    height: 400px;
+    border-radius: 10px;
+    padding: 30px;
+}
+
+.signin-inst {
+    font-size: 1.4em;
+    text-align: center;
+}

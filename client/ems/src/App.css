@@ -1,38 +1,75 @@
-.App {
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+.role-page-wrapper {
+  background-color: #909590;
+  height: 772px;
+}
+
+.title-section {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.main-title {
+  font-size: 4em;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.project-title {
+  font-size: 2.5em;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.role-split {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  margin-top: 50px;
+}
+
+.role-wrapper {
+  background-color: #03012C;
+  width: 60%;
+  margin: auto;
+  height: 400px;
+  padding: 50px;
+}
+
+.block-center {
+  text-align: center;
   color: white;
+  font-size: 1.3em;
 }
 
-.App-link {
-  color: #61dafb;
+.split {
+  width: 40%;
+  margin: auto;
+  height: 300px;
+
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.left {
+  background-color: azure;
+  text-align: center;
+}
+
+.right {
+  background-color: azure;
+  text-align: center;
+}
+
+.admin-svg {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.role-type {
+  font-size: 2em;
+  color: black;
+}
+
+.signin-a {
+  text-decoration: none;
 }

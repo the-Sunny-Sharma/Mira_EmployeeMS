@@ -1,0 +1,33 @@
+.department-list {
+margin: 44px 0 !important;
+max-height: 450px !important;
+}
+
+.flex-row{
+    justify-content: space-evenly;
+}
+
+.st_wrap_table .flex-row:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+.edit-button {
+    /* background-color: #3498db; */
+    background-color: #002147;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 8px;
+  }
+  
+  .delete-button {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  

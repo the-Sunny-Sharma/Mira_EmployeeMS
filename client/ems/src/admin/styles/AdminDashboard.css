@@ -1,0 +1,45 @@
+.dashboard-wrapper {
+    padding: 40px;
+    display: flex;
+    margin-top: 40px;
+    flex-direction: row;
+    flex-wrap: wrap;
+   
+}
+
+.logo span {
+    font-weight: 200;
+}
+
+.box{
+    margin: 20px;
+    width: 400px;
+}
+
+.chart-display {
+    width: 800px;
+    height: 400px;
+    border: 2px solid green;
+    text-align: center;
+    margin: auto;
+    margin-top: 180px;
+}
+
+.dropdown {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #214977;
+    font-size: 0.8em;
+}
+
+.drop-hr {
+    width: 80%;
+}
+
+.main-ul {
+    margin-top: 50px;
+}
+
+.li-option {
+    margin-top: 20px;
+}
