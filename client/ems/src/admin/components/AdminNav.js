@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "../styles/AdminDashboard.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function AdminNav() {
+  const navigate = useNavigate();
   const [showDepartmentOptions, setShowDepartmentOptions] = useState(false);
   const [showStaffOptions, setShowStaffOptions] = useState(false);
 
@@ -15,6 +16,15 @@ export default function AdminNav() {
     setShowStaffOptions(!showStaffOptions);
     setShowDepartmentOptions(false); // Hide other dropdowns when this one is active
   };
+  const logoutEmp = () => {
+    const confirmation = window.confirm("Are you sure you want to logout?");
+    if (!confirmation) {
+      return;
+    }
+    localStorage.clear();
+    navigate("/");
+  };
+
   return (
     <>
       <div className="navbar-left">
@@ -50,20 +60,17 @@ export default function AdminNav() {
               <li className="drop-option">
                 <Link to="/admin-manage-staff">Manage Staff</Link>
               </li>
-              {/* Add more staff options here */}
             </ul>
           )}
           <hr />
           <li className="li-option">
-            <Link to="#">Salary</Link>
-          </li>
-          <hr />
-          <li className="li-option">
-            <Link to="#">Leave</Link>
+            <Link to="/admin-manage-leave">Leave</Link>
           </li>
           <hr />
           <li className="logout li-option">
-            <Link to="#">Logout</Link>
+            <button className="logout-btn" onClick={() => logoutEmp()}>
+              Logout
+            </button>{" "}
           </li>
         </ul>
       </div>

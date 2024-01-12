@@ -167,7 +167,6 @@ a:hover {
   margin-top: 0;
 }
 
-/* Responsive adjustments */
 @media screen and (max-width: 768px) {
   .recent-activities,
   .notifications,
@@ -178,9 +177,6 @@ a:hover {
     width: 100%;
   }
 }
-
-/* Sample CSS for the mini-calendar */
-/* Customize styles as per your design preferences */
 
 .mini-calendar {
   width: calc(50% - 10px);
@@ -204,7 +200,6 @@ li {
   margin-bottom: 8px;
 }
 
-/* Responsive adjustments */
 @media screen and (max-width: 768px) {
   .mini-calendar {
     width: 100%;

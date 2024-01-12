@@ -2,11 +2,20 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import "../styles/AdminDashboard.css";
 import Chart from "chart.js/auto";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function AdminDashboard() {
+  const navigate = useNavigate();
   const chartRef = useRef(null);
   const chartInstance = useRef(null); // To keep track of the chart instance
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token !== "Admin authenticated successfully.") {
+      alert("Access Denied");
+      navigate("/");
+    }
+  });
 
   const [ip, setIp] = useState("");
   const [city, setCity] = useState("");
@@ -174,6 +183,16 @@ export default function AdminDashboard() {
     setShowStaffOptions(!showStaffOptions);
     setShowDepartmentOptions(false); // Hide other dropdowns when this one is active
   };
+
+  const logoutEmp = () => {
+    const confirmation = window.confirm("Are you sure you want to logout?");
+    if (!confirmation) {
+      return;
+    }
+    localStorage.clear();
+    navigate("/");
+  };
+
   return (
     <>
       <div
@@ -225,7 +244,7 @@ export default function AdminDashboard() {
                   <Link to="/admin-add-department">Add Department</Link>
                 </li>
                 <li className="drop-option">
-                  <Link to="#">Manage Department</Link>
+                  <Link to="/admin-manage-department">Manage Department</Link>
                 </li>
               </ul>
             )}
@@ -240,22 +259,19 @@ export default function AdminDashboard() {
                   <Link to="/admin-add-staff">Add Staff</Link>
                 </li>
                 <li className="drop-option">
-                  <Link to="#">Manage Staff</Link>
+                  <Link to="/admin-manage-staff">Manage Staff</Link>
                 </li>
-                {/* Add more staff options here */}
               </ul>
             )}
             <hr />
             <li className="li-option">
-              <Link to="#">Salary</Link>
-            </li>
-            <hr />
-            <li className="li-option">
-              <Link to="#">Leave</Link>
+              <Link to="/admin-manage-leave">Leave</Link>
             </li>
             <hr />
             <li className="logout li-option">
-              <Link to="#">Logout</Link>
+              <button className="logout-btn" onClick={() => logoutEmp()}>
+                Logout
+              </button>{" "}
             </li>
           </ul>
         </div>

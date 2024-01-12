@@ -3,11 +3,12 @@ import AdminNavbar from "../components/AdminNavbar";
 import "../styles/AdminForms.css";
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function AddDepartment() {
+  const navigate = useNavigate();
   const [departmentName, setDepartmentName] = useState("");
-  const [updateDName, setUpdateDName ] = useState("");
+  const [updateDName, setUpdateDName] = useState("");
   const [isUpdate, setIsUpdate] = useState(false);
 
   const hDepartmentName = (event) => {
@@ -15,6 +16,14 @@ export default function AddDepartment() {
   };
   const rDepartmentName = useRef("");
   const location = useLocation();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if(token !== 'Admin authenticated successfully.')
+    {
+        alert("Access Denied")
+        navigate("/");}
+  });
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -39,13 +48,12 @@ export default function AddDepartment() {
     // Trim extra spaces from the department name
     const trimmedDepartmentName = departmentName.replace(/\s+/g, " ").trim();
 
-    const departmentNameRegex = /^[a-zA-Z\s]+$/; // Regex to allow only letters and spaces
+    const departmentNameRegex = /^[a-zA-Z&\s]+$/; // Regex to allow only letters and spaces
     if (!departmentNameRegex.test(trimmedDepartmentName)) {
       alert("Department name should only contain letters and spaces");
       return;
     }
 
-  
     try {
       const existingDepartments = await axios.get(
         "http://localhost:9000/getDepartments"
@@ -62,27 +70,26 @@ export default function AddDepartment() {
         return;
       }
 
-      if (isUpdate) { 
+      if (isUpdate) {
         const data = {
           oldDepartmentName: updateDName, // Include the old department name for update
           newDepartmentName: trimmedDepartmentName, // Include the updated department name
         };
-       
-        
-            let url = "http://localhost:9000/updateDepartment";
-            axios
-              .put(url, data)
-              .then((res) => {
-                alert(
-                  `Department '${trimmedDepartmentName}' updated successfully!`
-                );
-                setDepartmentName("");
-              })
-              .catch((err) => console.log("Issue: " + err));
+
+        let url = "http://localhost:9000/updateDepartment";
+        axios
+          .put(url, data)
+          .then((res) => {
+            alert(
+              `Department '${trimmedDepartmentName}' updated successfully!`
+            );
+            setDepartmentName("");
+          })
+          .catch((err) => console.log("Issue: " + err));
       } else {
         const dData = {
-          departmentName : trimmedDepartmentName,
-        }
+          departmentName: trimmedDepartmentName,
+        };
         const response = await axios.post(
           "http://localhost:9000/addDepartment",
           dData

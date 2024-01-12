@@ -13,6 +13,7 @@ import EmpProfile from "./employee/pages/EmpProfile";
 import ApplyLeave from "./employee/pages/ApplyLeave";
 import ViewLeave from "./employee/pages/ViewLeave";
 import ManageLeave from './admin/pages/ManageLeave';
+import Page404 from "./Page404";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/admin-add-staff" element={<AddStaff />} />
           <Route path="/admin-manage-staff" element={<ManageUsers />} />
           <Route path="/admin-manage-leave" element={<ManageLeave />} />
+          <Route path="*" element={<Page404 />} />
         </Routes>
       </BrowserRouter>
     </>
@@ -39,3 +41,4 @@ function App() {
 }
 
 export default App;
+

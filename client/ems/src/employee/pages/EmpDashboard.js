@@ -41,11 +41,10 @@ const EmpDashboard = () => {
         setWeatherData(res.data);
         const temperatureInKelvin = res.data.main.temp;
         const temperatureInCelsius = temperatureInKelvin - 273.15;
-        setWeather(temperatureInCelsius.toFixed(1)); // Assuming setWeather is a state updater function
+        setWeather(temperatureInCelsius.toFixed(1));
       })
       .catch((err) => {
         console.log("Error fetching weather data", err);
-        // Handle error state or display an error message in your UI
       });
   }, [city]);
 
@@ -67,7 +66,7 @@ const EmpDashboard = () => {
       className = "Clear";
     }
     return className;
-    // return 'snow';
+    // return 'sunny';
   }
 
   function getGreetingMessage() {
@@ -94,7 +93,7 @@ const EmpDashboard = () => {
         borderWidth: 1,
         hoverBackgroundColor: "rgba(54, 162, 235, 0.8)",
         hoverBorderColor: "rgba(54, 162, 235, 1)",
-        data: [12, 19, 3, 5, 2, 3, 10], // Replace with actual performance data
+        data: [12, 19, 3, 5, 2, 3, 10], 
       },
     ],
   };
@@ -104,7 +103,7 @@ const EmpDashboard = () => {
     labels: ["Meetings", "Tasks Completed", "Tasks Pending"],
     datasets: [
       {
-        data: [30, 50, 20], // Replace with actual insights data
+        data: [30, 50, 20], 
         backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
         hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
       },
@@ -125,7 +124,7 @@ const EmpDashboard = () => {
     "Project deadline approaching",
   ];
 
- // Dummy data for mini-calendar (sample for current month)
+ // Dummy data for mini-calendar 
  const miniCalendar = [
   { date: "2024-01-01", event: "Holiday" },
   { date: "2024-01-02", event: "Team Meeting" },
@@ -162,7 +161,6 @@ const EmpDashboard = () => {
     { label: "Employee Handbook", link: "/handbook" },
     { label: "Training Materials", link: "/training" },
     { label: "Company Policies", link: "/policies" },
-    // Add more resource links as needed
   ];
 
   const logoutEmp = () => {

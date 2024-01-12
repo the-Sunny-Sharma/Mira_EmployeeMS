@@ -46,18 +46,18 @@ export default function ViewLeave() {
             <header class="st_table_header">
               <h2 className="head-table">View Leave</h2>
               <div class="st_row flex-row">
-                <div class="st_column _name">Sr. No.</div>
+                <div class="st_column _rank">Sr. No.</div>
                 <div class="st_column _name">Reason</div>
                 <div class="st_column _name">From</div>
                 <div class="st_column _name">To</div>
                 <div class="st_column _name">Status</div>
-                <div class="st_column _name">Description</div>
+                <div class="st_column _description">Description</div>
                 <div class="st_column _name">Applied On</div>
               </div>
             </header>
             {leaveData.map((leave, index) => (
               <div class="st_row flex-row new-row">
-                <div class="st_column _name">{index + 1}</div>
+                <div class="st_column _rank">{index + 1}</div>
                 <div class="st_column _name">{leave.reason}</div>
                 <div class="st_column _name">
                   {format(new Date(leave.from), "dd/MM/yyyy")}
@@ -75,7 +75,7 @@ export default function ViewLeave() {
                     {leave.status}
                   </div>
                 </div>
-                <div class="st_column _name">{leave.description}</div>
+                <div class="st_column _description">{leave.description}</div>
                 <div className="st_column _name">
                   {format(new Date(leave.appliedOn), "dd/MM/yyyy")}
                 </div>{" "}

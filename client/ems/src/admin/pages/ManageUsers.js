@@ -11,6 +11,14 @@ export default function ManageUsers() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    if(token !== 'Admin authenticated successfully.')
+    {
+        alert("Access Denied")
+        navigate("/");}
+  });
+
+  useEffect(() => {
     // Fetch department names from the database
     const fetchDepartments = async () => {
       try {
@@ -23,13 +31,14 @@ export default function ManageUsers() {
       }
     };
     fetchDepartments();
-    console.log(departments);
+    // console.log(departments);
   });
 
   useEffect(() => {
     const fetchEmployeeData = async () => {
       try {
         let urlDepart = `http://localhost:9000/getStaffData`;
+        // let urlDepart = `http://localhost:9000/getAllStaff`;
         const data = {};
         for (const department of departments) {
           let departmentNamex = department.departmentName;
@@ -50,12 +59,13 @@ export default function ManageUsers() {
   }, [departments]);
 
   const handleEditUser = (empId) => {
-    // console.log(empId)
     navigate(`/admin-add-staff?empId=${empId}`);
   };
 
   const handleDeleteUser = async (empId) => {
-    const confirmation = window.confirm("Are you sure you want to delete " + empId + "?");
+    const confirmation = window.confirm(
+      "Are you sure you want to delete " + empId + "?"
+    );
 
     if (!confirmation) {
       return; // User clicked "Cancel"
@@ -65,15 +75,12 @@ export default function ManageUsers() {
         data: { empId },
       });
       // Refresh the department list after deletion
-      const response = await axios.get(
-        "http://localhost:9000/getDepartments"
-      );
+      const response = await axios.get("http://localhost:9000/getDepartments");
       setEmpData(response.data);
     } catch (error) {
       console.error("Error deleting Staff :", error);
     }
-  }
- 
+  };
 
   return (
     <>
@@ -115,8 +122,12 @@ export default function ManageUsers() {
                       >
                         Edit
                       </button>
-                      <button className="delete-button"
-                      onClick={() => handleDeleteUser(employee.empId)}>Delete</button>
+                      <button
+                        className="delete-button"
+                        onClick={() => handleDeleteUser(employee.empId)}
+                      >
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 ))}

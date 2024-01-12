@@ -8,6 +8,14 @@ import { useNavigate } from "react-router-dom";
 export default function ManageDepartment() {
   const [departments, setDepartments] = useState([]);
   const navigate = useNavigate();
+  
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if(token !== 'Admin authenticated successfully.')
+    {
+        alert("Access Denied")
+        navigate("/");}
+  });
 
   useEffect(() => {
     // Fetch department names from the database

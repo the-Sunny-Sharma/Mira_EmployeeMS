@@ -1,11 +1,27 @@
 const express = require("express");
 const cors = require("cors");
 const { MongoClient } = require("mongodb");
+const AdminCredentials = require("./AdminCredentials");
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Endpoint to authenticate admin credentials
+app.post("/admin/login", (req, res) => {
+  const { id, password } = req.body;
+
+  if (id === AdminCredentials.id && password === AdminCredentials.password) {
+    // Credentials match
+    res.send("Admin authenticated successfully.");
+    console.log("Admin Login Activity detected");
+  } else {
+    // Invalid credentials
+    res.send("Invalid Credentials.");
+    console.log("Unauthorized access rejected");
+  }
+});
+//Adding a new employee data
 app.post("/addStaff", (req, res) => {
   const url = "mongodb://0.0.0.0:27017";
   const client = new MongoClient(url);
@@ -47,6 +63,36 @@ app.post("/addStaff", (req, res) => {
     });
 });
 
+app.put("/updateStaff", (req, res) => {
+  const url = "mongodb://0.0.0.0:27017";
+  const client = new MongoClient(url);
+  const db = client.db("synEmployeeSystem");
+  const coll = db.collection("userDetails");
+  coll
+    .updateOne(
+      { empId: req.body.empId }, // Search by the employee ID
+      { $set: { 
+        dob: req.body.dob,
+        gender: req.body.gender,
+        mail: req.body.mail,
+        phone: req.body.phone,
+        address: req.body.address,
+        department: req.body.department,
+        position: req.body.position,
+        hireDate: req.body.hireDate,
+        salary: req.body.salary,
+        bonus: req.body.bonus,
+        payMethod: req.body.payMethod,
+        managerID: req.body.managerID,
+        status: req.body.status,
+        emergencyNo: req.body.emergencyNo,
+        comment: req.body.comment, } } 
+    )
+    .then((result) => res.send(result))
+    .catch((error) => res.send(error));
+});
+
+//add new leave data request
 app.post("/apply-leave", (req, res) => {
   const url = "mongodb://0.0.0.0:27017";
   const client = new MongoClient(url);
@@ -76,6 +122,7 @@ app.post("/apply-leave", (req, res) => {
     });
 });
 
+//view the leave data for specific user
 app.get("/viewLeave", (req, res) => {
   const url = "mongodb://0.0.0.0:27017";
   const client = new MongoClient(url);
@@ -84,6 +131,22 @@ app.get("/viewLeave", (req, res) => {
   const empId = req.query.empId;
   coll
     .find({ empId })
+    .toArray()
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((error) => {
+      res.send(error);
+    });
+});
+app.get("/getStaffData", (req, res) => {
+  const url = "mongodb://0.0.0.0:27017";
+  const client = new MongoClient(url);
+  const db = client.db("synEmployeeSystem");
+  const coll = db.collection("userDetails");
+  const department = req.query.departmentNamex;
+  coll
+    .find({ department })
     .toArray()
     .then((result) => {
       res.send(result);
@@ -136,11 +199,9 @@ app.get("/getStaffDetails/:empId", (req, res) => {
   coll
     .findOne({ empId }) // Use object shorthand
     .then((result) => {
-      // console.log(result);
       res.send(result);
     })
     .catch((error) => {
-      // console.log(error)
       res.send(error);
     });
 });
@@ -250,6 +311,29 @@ app.put("/updateDepartment", (req, res) => {
       { $set: { departmentName: req.body.newDepartmentName } } // Set the new department name
     )
     .then((result) => res.send(result))
+    .catch((error) => res.send(error));
+});
+
+app.put("/updateLeaveStatus", (req, res) => {
+  const { empId, appliedOn, status } = req.body;
+  const url = "mongodb://0.0.0.0:27017";
+  const client = new MongoClient(url);
+  const db = client.db("synEmployeeSystem");
+  const coll = db.collection("leaveManagement");
+
+  coll
+    .updateOne(
+      { empId: empId, appliedOn: appliedOn },
+      { $set: { status: status } }
+    )
+    .then((result) => {
+      if (status === "Rejected") {
+        console.log("Leave Rejected");
+      } else {
+        console.log("Leave Approved");
+      }
+      res.send(result);
+    })
     .catch((error) => res.send(error));
 });
 

@@ -30,7 +30,7 @@ body {
 }
 
 .role-wrapper {
-  background-color: #03012C;
+  background-color: #03012c;
   width: 60%;
   margin: auto;
   height: 400px;
@@ -47,7 +47,6 @@ body {
   width: 40%;
   margin: auto;
   height: 300px;
-
 }
 
 .left {
@@ -72,4 +71,37 @@ body {
 
 .signin-a {
   text-decoration: none;
+}
+
+.h-5 {
+  font-size: 7em;
+  color: #002147;
+}
+
+.div-center {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  margin: auto;
+  text-align: center;
+  align-items: center;
+  margin-top: 170px;
+}
+
+.p-2 {
+  font-size: 2em;
+}
+
+.p-0 {
+  margin: 15px;
+}
+
+.n-btn {
+  background-color: 	#002147;
+  color: white;
+  border: none;
+  padding: 10px;
+  height: 50px;
+  width: 190px;
+  border-radius: 25px;
 }
